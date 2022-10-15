@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=MythRecCal
+Comment=Set MythTV Recordings Using Calendar
+Icon=gtk-media-record
+Exec=/opt/mythreccal/mythreccal.py
+Terminal=true
+Type=Application
+Categories=Utility;Settings

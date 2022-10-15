@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+import os, sys, shutil
+
+if __name__ == '__main__':
+    if os.geteuid() == 0:
+        print('Checking if installation files are present')
+        allFilesPresent = True
+        if not os.path.isfile('./mythreccal.py'):
+            print('mythreccal.py could not be found')
+            allFilesPresent = False
+        if not os.path.isfile('./mythreccal.desktop'):
+            print('mythreccal.desktop could not be found')
+            allFilesPresent = False
+        if not allFilesPresent:
+            print('No changes made')
+            print('Exiting')
+            sys.exit(0)
+        if os.path.isdir('/opt/mythreccal'):
+            shutil.rmtree('/opt/mythreccal')
+        os.mkdir('/opt/mythreccal')
+        print('Installing MythRecCal')
+        shutil.copy("./mythreccal.py", "/opt/mythreccal/mythreccal.py")
+        shutil.copy("./mythreccal.desktop", "/usr/share/applications/mythreccal.desktop")
+        os.chmod("/opt/mythreccal/mythreccal.py", 0o755)
+        print('Mythreccal was successfully installed.')
+        print('Start MythRecCal and change the settings.')
+    else:
+        print('This install script must be run with sudo')
+        print('No changes made')
+        print('Exiting')
