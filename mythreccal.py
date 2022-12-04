@@ -43,7 +43,7 @@ def get_ical_recordings(calendar):
                             title = ical_ics[i+j+12 : i+j+k].replace('\n', '').replace('\r', '')
                             if ical_ics[i+j+k : i+j+k+3] == '\\n"':
                                 for l in range(len(ical_ics)-i-j-k-3):
-                                    if ical_ics[i+j+k+l : i+j+k+l+3] == '"\\n':
+                                    if ical_ics[i+j+k+l : i+j+k+l+2] == '"\\':
                                         subtitle = ical_ics[i+j+k+3 : i+j+k+l]
                                         subtitle = subtitle.replace('\n', '').replace('\r', '')
                                         chan_position = i+j+k+l+3
