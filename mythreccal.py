@@ -39,18 +39,17 @@ def get_ical_recordings(calendar):
             for j in range(len(ical_ics)-i-12):
                 if ical_ics[i+j : i+j+12] == 'DESCRIPTION:':
                     for k in range(len(ical_ics)-i-j-3):
-                        if ical_ics[i+j+k : i+j+k+2] == '\\n':
-                            title = ical_ics[i+j+12 : i+j+k].replace('\n', '').replace('\r', '')
-                            if ical_ics[i+j+k : i+j+k+3] == '\\n"':
-                                for l in range(len(ical_ics)-i-j-k-3):
-                                    if ical_ics[i+j+k+l : i+j+k+l+2] == '"\\':
-                                        subtitle = ical_ics[i+j+k+3 : i+j+k+l]
-                                        subtitle = subtitle.replace('\n', '').replace('\r', '')
-                                        chan_position = i+j+k+l+3
-                                        break
-                            else:
-                                subtitle = ''
-                                chan_position = i+j+k+2
+                        if ical_ics[i+j+k : i+j+k+1] == '"':
+                            title = ical_ics[i+j+12 : i+j+k-1]
+                            for l in range(len(ical_ics)-i-j-k-3):
+                                if ical_ics[i+j+k+l+1 : i+j+k+l+2] == '"':
+                                    subtitle = ical_ics[i+j+k+1 : i+j+k+l+1]
+                                    subtitle = subtitle.replace('\n', '').replace('\r', '')
+                                    chan_position = i+j+k+l+3
+                                    break
+                        else:
+                            subtitle = ''
+                            chan_position = i+j+k+3
                             break
                 else:
                     if ical_ics[i+j : i+j+10] == 'END:VEVENT':
