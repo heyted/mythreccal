@@ -47,9 +47,6 @@ def get_ical_recordings(calendar):
                                     subtitle = subtitle.replace('\n', '').replace('\r', '')
                                     chan_position = i+j+k+l+3
                                     break
-                        else:
-                            subtitle = ''
-                            chan_position = i+j+k+3
                             break
                 else:
                     if ical_ics[i+j : i+j+10] == 'END:VEVENT':
